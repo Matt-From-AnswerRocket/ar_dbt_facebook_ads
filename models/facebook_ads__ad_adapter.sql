@@ -32,6 +32,12 @@ with report as (
     from {{ var('campaign_history') }}
     where is_most_recent_record = true
 
+), conversions as (
+
+   select *
+   from {{ var('ad_conversion') }}
+   where is_most_recent_record = true
+
 ), joined as (
 
     select
@@ -56,10 +62,13 @@ with report as (
         creatives.utm_term,
         sum(report.clicks) as clicks,
         sum(report.impressions) as impressions,
-        sum(report.spend) as spend
+        sum(report.spend) as spend,
+        count(conversions.action_type) as conversions,
     from report
     left join ads 
         on cast(report.ad_id as {{ dbt_utils.type_bigint() }}) = cast(ads.ad_id as {{ dbt_utils.type_bigint() }})
+    left join conversions 
+        on cast(ads.ad_id as {{ dbt_utils.type_bigint() }}) = cast(conversions.ad_id as {{ dbt_utils.type_bigint() }})
     left join creatives
         on cast(ads.creative_id as {{ dbt_utils.type_bigint() }}) = cast(creatives.creative_id as {{ dbt_utils.type_bigint() }})
     left join ad_sets

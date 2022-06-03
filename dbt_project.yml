@@ -18,3 +18,4 @@ vars:
     campaign_history: "{{ ref('stg_facebook_ads__campaign_history') }}"
     creative_history: "{{ ref('stg_facebook_ads__creative_history') }}"
     url_tag: "{{ ref('stg_facebook_ads__url_tag') }}"
+    ad_conversion: "{{ ref('stg_facebook_ads__ad_conversion') }}"

@@ -48,6 +48,8 @@ models:
         description: The number of impressions the ad had on the given day.
       - name: spend
         description: The spend on the ad in the given day.
+      - name: conversions
+        description: The number of converions from an ad on a given day.
 
   - name: facebook_ads__ad_set_report
     description: Each record represents the daily performance of a Facebook ad set.
@@ -72,6 +74,8 @@ models:
         description: The number of impressions the ad had on the given day.
       - name: spend
         description: The spend on the ad in the given day.
+      - name: conversions
+        description: The number of converions from an ad on a given day.
 
   - name: facebook_ads__campaign_report
     description: Each record represents the daily performance of a Facebook campaign.
@@ -92,6 +96,8 @@ models:
         description: The number of impressions the ad had on the given day.
       - name: spend
         description: The spend on the ad in the given day.
+      - name: conversions
+        description: The number of converions from an ad on a given day.
 
   - name: facebook_ads__account_report
     description: Each record represents the daily performance of a Facebook account.
@@ -108,3 +114,5 @@ models:
         description: The number of impressions the ad had on the given day.
       - name: spend
         description: The spend on the ad in the given day.
+      - name: conversions
+        description: The number of converions from an ad on a given day.

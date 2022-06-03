@@ -15,7 +15,8 @@ with adapter as (
         ad_set_name,
         sum(clicks) as clicks,
         sum(impressions) as impressions,
-        sum(spend) as spend
+        sum(spend) as spend,
+        sum(conversions) as conversions
     from adapter
     {{ dbt_utils.group_by(7) }}
 
