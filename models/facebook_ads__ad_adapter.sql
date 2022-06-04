@@ -63,7 +63,7 @@ with report as (
         sum(report.clicks) as clicks,
         sum(report.impressions) as impressions,
         sum(report.spend) as spend,
-        count(conversions.action_type) as conversions,
+        count(conversions.action_type) as conversions
     from report
     left join ads 
         on cast(report.ad_id as {{ dbt_utils.type_bigint() }}) = cast(ads.ad_id as {{ dbt_utils.type_bigint() }})
