@@ -3,11 +3,6 @@ with report as (
     select *
     from {{ var('basic_ad') }}
 
-), creatives as (
-
-    select *
-    from {{ ref('facebook_ads__creative_history_prep') }}
-
 ), accounts as (
 
     select *
@@ -50,16 +45,16 @@ with report as (
         ad_sets.ad_set_name,
         ads.ad_id,
         ads.ad_name,
-        creatives.creative_id,
-        creatives.creative_name,
-        creatives.base_url,
-        creatives.url_host,
-        creatives.url_path,
-        creatives.utm_source,
-        creatives.utm_medium,
-        creatives.utm_campaign,
-        creatives.utm_content,
-        creatives.utm_term,
+        null as creative_id,
+        null as creative_name,
+        null as base_url,
+        null as url_host,
+        null as url_path,
+        null as utm_source,
+        null as utm_medium,
+        null as utm_campaign,
+        null as utm_content,
+        null as utm_term,
         sum(report.clicks) as clicks,
         sum(report.impressions) as impressions,
         sum(report.spend) as spend,
@@ -69,8 +64,6 @@ with report as (
         on cast(report.ad_id as {{ dbt_utils.type_bigint() }}) = cast(ads.ad_id as {{ dbt_utils.type_bigint() }})
     left join conversions 
         on cast(ads.ad_id as {{ dbt_utils.type_bigint() }}) = cast(conversions.ad_id as {{ dbt_utils.type_bigint() }})
-    left join creatives
-        on cast(ads.creative_id as {{ dbt_utils.type_bigint() }}) = cast(creatives.creative_id as {{ dbt_utils.type_bigint() }})
     left join ad_sets
         on cast(ads.ad_set_id as {{ dbt_utils.type_bigint() }}) = cast(ad_sets.ad_set_id as {{ dbt_utils.type_bigint() }})
     left join campaigns
